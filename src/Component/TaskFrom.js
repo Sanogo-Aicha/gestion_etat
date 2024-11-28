@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import tasks from "./TaskList";
+import tasklist from "./TaskList";
 import './TaskForm.css';
 function TaskForm(){
-    const [tasks,setTasks]=useState(tasks);
+    const [tasks,setTasks]=useState(tasklist);
     const[newtask,setNewtask]=useState("");
    
     //FONCTION POUR changer la valeur de input 
@@ -14,7 +14,6 @@ function TaskForm(){
 const handleaddTask=()=>{
   setTasks([...tasks,newtask]);
   console.log(setTasks);
-setNewtask("");
 }
 //FONCTION POUR supprimer UNE TACHE
 const handledeleteTask=(index)=>{
