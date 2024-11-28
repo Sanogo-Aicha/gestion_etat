@@ -1,4 +1,4 @@
-var TaskList=["Perform the Farj prayer" ," Try home ,Take a shower" ,
+import React from "react";
+var tasks=["Perform the Farj prayer" ," Try home ,Take a shower" ,
     "Take a shower have breakfast" ,"Go to university"]
-
-export default TaskList;
+export default tasks;

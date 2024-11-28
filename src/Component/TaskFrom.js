@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import TaskList from "./TaskList";
+import tasks from "./TaskList";
 import './TaskForm.css';
 function TaskForm(){
-    const [task,setTask]=useState(TaskList);
+    const [tasks,setTasks]=useState(tasks);
     const[newtask,setNewtask]=useState("");
    
     //FONCTION POUR changer la valeur de input 
@@ -12,14 +12,14 @@ function TaskForm(){
     }
 //FONCTION POUR AJOUTER UNE TACHE
 const handleaddTask=()=>{
-  setTask([...task,newtask]);
-  console.log(setTask);
+  setTasks([...tasks,newtask]);
+  console.log(setTasks);
 setNewtask("");
 }
 //FONCTION POUR supprimer UNE TACHE
 const handledeleteTask=(index)=>{
-    const Updatedtask=task.filter((_,i) =>i!== index);
-    setTask(Updatedtask)
+    const Updatedtask=tasks.filter((_,i) =>i!== index);
+    setTasks(Updatedtask)
 }
 
 
@@ -40,12 +40,12 @@ const handlemoveTask=(index)=>{
            </h1>
            </div>
            <form >
-             <input type="text" placeholder="Entrer task" name="task" value={newtask} onChange={handlechangeInput} />
+             <input type="text" placeholder="Entrer tasks" name="tasks" value={newtask} onChange={handlechangeInput} />
              <button className="add-button" onClick={handleaddTask}>Add</button>
              <ol>
-               {TaskList.map((task,index)=>
+               {tasks.map((tasks,index)=>
                    <li key={index}>
-                    <span className="Text">{task}</span>
+                    <span className="Text">{tasks}</span>
                     <button className="delete-button" onClick={handledeleteTask}>Delete</button>
                     <button className="move-button">Up</button>
                     <button className="move-button">Down</button>
