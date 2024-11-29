@@ -11,24 +11,38 @@ function TaskForm(){
        
     }
 //FONCTION POUR AJOUTER UNE TACHE
-const handleaddTask=()=>{
+const handleaddTask=(e)=>{
+  e.preventDefault();
   setTasks([...tasks,newtask]);
+  setNewtask("");
   console.log(setTasks);
 }
 //FONCTION POUR supprimer UNE TACHE
 const handledeleteTask=(index)=>{
     const Updatedtask=tasks.filter((_,i) =>i!== index);
-    setTasks(Updatedtask)
+    setTasks(Updatedtask);
 }
 
 
-//FONCTION POUR AJOUTER UNE TACHE
+//FONCTION POUR ranger mes par ordre decroissant TACHE
 const handlemoveTaskup=(index)=>{
+  if(index>0){
+    const updateTasks=[...tasks];
+    [updateTasks[index],updateTasks[index-1]]=
+    [updateTasks[index-1],updateTasks[index]];
+    setTasks(updateTasks)
+  }
 
 }
 //FONCTION POUR AJOUTER UNE TACHE
-const handlemoveTask=(index)=>{
-
+const handlemoveTaskdown=(index)=>{
+  
+  if(index <tasks.length){
+    const updateTasks=[...tasks];
+    [updateTasks[index],updateTasks[index+1]]=
+    [updateTasks[index+1],updateTasks[index]];
+    setTasks(updateTasks)
+  }
 }
 
     return(
@@ -38,22 +52,22 @@ const handlemoveTask=(index)=>{
             TO DO LIST
            </h1>
            </div>
-           <form >
-             <input type="text" placeholder="Entrer tasks" name="tasks" value={newtask} onChange={handlechangeInput} />
-             <button className="add-button" onClick={handleaddTask}>Add</button>
-             <ol>
-               {tasks.map((tasks,index)=>
+           <form onSubmit={handleaddTask}>
+             <input type="text" placeholder="Entrer tasks" name="tasks" value={newtask} onChange={handlechangeInput} required/>
+             <button className="add-button" type="submit">Add</button>
+           </form>
+           <ol>
+               {tasks.map((task,index)=>
                    <li key={index}>
-                    <span className="Text">{tasks}</span>
-                    <button className="delete-button" onClick={handledeleteTask}>Delete</button>
-                    <button className="move-button">Up</button>
-                    <button className="move-button">Down</button>
+                    <span className="Text">{task}</span>
+                    <button className="delete-button" onClick={ ()=> handledeleteTask(index)}>Delete</button>
+                    <button className="move-button" onClick={()=>handlemoveTaskup(index)}>Up</button>
+                    <button className="move-button" onClick={()=> handlemoveTaskdown(index)}>Down</button>
                    </li>
                )
                
                }
              </ol>
-           </form>
         </div>
     )
 }
